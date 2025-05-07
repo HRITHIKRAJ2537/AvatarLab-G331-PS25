@@ -1,27 +1,43 @@
-import { Layers, FileVideo, HelpCircle, Trash, Send, Settings} from "lucide-react";
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarGroupLabel } from "@/components/ui/sidebar";
-import Link from "next/link";
+import type React from "react"
+import { Layers, FileVideo, HelpCircle, Trash, AudioLines, Send, UserRound } from "lucide-react"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarGroupLabel,
+} from "@/components/ui/sidebar"
+import Link from "next/link"
 
 type MenuItem = {
-  title: string;
-  url: string;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-};
+  title: string
+  url: string
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+}
 
 const videos: MenuItem[] = [
   { title: "Workspace", url: "/workspace", icon: Layers },
   { title: "My Videos", url: "/videos", icon: FileVideo },
   { title: "Trash", url: "/trash", icon: Trash },
-  
-];
+]
 
+const assets: MenuItem[] = [
+  { title: "Avatars", url: "/avatars", icon: UserRound },
+  { title: "Voices", url: "/voices", icon: AudioLines },
+  {title : "Upload Avatar", url : "/upload-avatar" , icon : UserRound},
+  {title : "Upload Voice", url : "/upload-voice" , icon : AudioLines}
+]
 
 const others: MenuItem[] = [
-
-  { title: "Settings", url: "/settings", icon: Settings },
   { title: "Feedback", url: "/feedback", icon: Send },
   { title: "Help & Support", url: "/help&support", icon: HelpCircle },
-];
+]
+
+
 
 export function AppSidebar() {
   const renderItems = (itemList: MenuItem[]) =>
@@ -30,32 +46,37 @@ export function AppSidebar() {
         <SidebarMenuButton asChild>
           <Link href={url} className="flex items-center space-x-2">
             <Icon className="h-5 w-5" />
-            <span className="font-semibold text-stone-700" style={{fontSize:'15px'}}>{title}</span>
+            <span className="" style={{ fontSize: "15px" }}>
+              {title}
+            </span>
           </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
-    ));
+    ))
 
   return (
     <Sidebar>
       <SidebarHeader className="flex flex-row p-4">
-        <span className="text-2xl font-semibold">{process.env.NEXT_PUBLIC_APP_NAME}</span>
+        <span className="text-2xl font-semibold">{process.env.NEXT_PUBLIC_APP_NAME || "AvatarLab"}</span>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-
-          <SidebarGroupLabel className="mt-2 text-stone-500">Videos</SidebarGroupLabel>
+          <SidebarGroupLabel className="mt-2 text-stone-950">Videos</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>{renderItems(videos)}</SidebarMenu>
           </SidebarGroupContent>
 
-          <SidebarGroupLabel className="mt-2 text-stone-500">Others</SidebarGroupLabel>
+          <SidebarGroupLabel className="mt-2 text-stone-950">Assets</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>{renderItems(assets)}</SidebarMenu>
+          </SidebarGroupContent>
+
+          <SidebarGroupLabel className="mt-2 text-stone-950">Others</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>{renderItems(others)}</SidebarMenu>
           </SidebarGroupContent>
-          
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  );
+  )
 }

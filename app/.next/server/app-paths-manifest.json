@@ -1,0 +1,7 @@
+{
+  "/(dashboard)/settings/page": "app/(dashboard)/settings/page.js",
+  "/(dashboard)/trash/page": "app/(dashboard)/trash/page.js",
+  "/(dashboard)/videos/page": "app/(dashboard)/videos/page.js",
+  "/(dashboard)/workspace/page": "app/(dashboard)/workspace/page.js",
+  "/(dashboard)/upload-avatar/page": "app/(dashboard)/upload-avatar/page.js"
+}

@@ -8,17 +8,56 @@ datasource db {
 }
 
 model Avatar {
-  id     String @id
-  name   String
-  gender String
-  video  Bytes
+  id        String @id @default(uuid())
+  name      String
+  gender    String
+  video     Bytes
+  templates Bytes
 }
 
 model Voice {
-  id       String @id
-  name     String
-  text     String
-  gender   String
-  audio    Bytes
-  language String
+  id              String @id @default(uuid())
+  name            String
+  text_normalized String
+  gender          String
+  audio           Bytes
+  language        String
 }
+
+model LinaOutput {
+  id        String   @id @default(uuid())
+  audio     Bytes
+  hubert    Bytes
+  usertext  String
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model UserAvatar {
+  id             String @id @default(uuid())
+  name           String
+  gender         String
+  video          Bytes
+  userIdentifier String
+}
+
+model UserVoice {
+  id              String @id @default(uuid())
+  name            String
+  text_normalized String
+  gender          String
+  audio           Bytes
+  language        String
+  userIdentifier String
+
+}
+model TrashItem {
+  id             String   @id @default(uuid())
+  itemId         String
+  itemType       String // "video", "avatar", or "voice"
+  userIdentifier String
+  name           String
+  thumbnail      Bytes? // Optional thumbnail for videos and avatars
+  deletedAt      DateTime @default(now())
+}
+
